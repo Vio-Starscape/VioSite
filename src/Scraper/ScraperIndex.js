@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './scraper.css';
 import axios from "axios";
+import { instance } from "../instance";
 
 function Account({ AccountObject, changeFunction }) {
 
@@ -35,24 +36,20 @@ function ScraperIndex({ VioUser }) {
     const navigate = useNavigate();
 
     const changeFunction = (account, mark_yoinked) => {
-        axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/scraper/update`, 
-            {
+        instance
+            .post('scrapers/update', {
                 name: account.name,
                 active: account.active,
                 yoinked: mark_yoinked
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('vio-token')}`
+            })
+            .then((res) => {
+                if (res.status === 200) {
+                    account.yoinked = mark_yoinked;
+                    set_list_of_accounts([...list_of_accounts]);
                 }
-        }).then((res) => {
-            if (res.status === 200) {
-                account.yoinked = mark_yoinked;
-                set_list_of_accounts([...list_of_accounts]);
-            }
-        }).catch((err) => {
-            console.error('Failed to update account:', err);
-        })
+            }).catch((err) => {
+                console.error('Failed to update account:', err);
+            })
     }
 
     useEffect(() => {
@@ -66,17 +63,16 @@ function ScraperIndex({ VioUser }) {
         }
 
         // Get list of accounts
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/scrapers`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then((res) => {
-            if (res.status === 200) {
-                set_list_of_accounts(res.data);
-            }
-        }).catch((err) => {
-            console.error('Failed to get accounts!', err);
-        });
+
+        instance.get('/scrapers')
+            .then((res) => {
+                if (res.status === 200) {
+                    set_list_of_accounts(res.data);
+                }
+            })
+            .catch((err) => {
+                console.error('Failed to get accounts:', err);
+            });
 
     }, []);
 

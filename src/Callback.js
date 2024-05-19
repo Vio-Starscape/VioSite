@@ -1,7 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
-
-import axios from 'axios';
+import { instance } from './instance';
 
 function Callback() {
   const location = useLocation();
@@ -14,23 +13,27 @@ function Callback() {
   if (state !== storedState) {
     console.error('State mismatch');
     history('/');
+    window.location.reload();
   } else {
     console.log('State match');
   }
 
   useEffect(() => {
-    axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/auth/register`, { code })
+    instance.post('/auth/register', { code })
       .then((res) => {
         if (res.status === 200) {
-          console.log('Successfully registered');
+          console.log('Successfully logged in');
           localStorage.setItem('vio-token', res.data.token);
         } else {
-          console.log('Failed to register');
+          console.log('Failed to log in');
         }
         history('/');
+        window.location.reload();
       })
       .catch((err) => {
-        console.error('Failed to register:', err);
+        console.error('Failed to log in:', err);
+        history('/');
+        window.location.reload();
       });
   }, [code, history]);
   

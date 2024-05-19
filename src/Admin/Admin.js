@@ -1,16 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import './admin.css';
 import PermissionManagement from "./Permissions";
 import ItemNameManagement from "./ItemNameManagement";
+import { VioContext } from "../context";
 
 function Admin() {
 
+    const { VioUser } = useContext(VioContext);
+
     useEffect(() => {
-        const token = localStorage.getItem('vio-token');
-        if (!token) {
+        if (!(VioUser && VioUser.admin)){
             window.location.href = '/';
         }
-    }, []);
+    });
 
     return (
         <div>
