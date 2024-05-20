@@ -33,7 +33,7 @@ function Terminal({VioUser}) {
                             Hello
                         </div>
                         <div className="w-2/3 bg-red-400 rounded-3xl p-5 m-4">
-                            Hello 2
+                            {currentItem ? currentItem.name : 'Loading...'}
                         </div>
                     </div>
                 </div>
