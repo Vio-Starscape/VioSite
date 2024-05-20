@@ -33,7 +33,7 @@ function Index({ VioUser }) {
         <Navbar className="z-10" VioUser={VioUser} />
         <div className="absolute top-0 left-0 w-full h-full z-0 bg-black flex items-center justify-center">
             <h1 className="text-white text-center text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-anta shadow-lg z-10">
-              {!VioUser ? "Level Up with Vio" : `Welcome, ${VioUser.user.username}`}
+              {!VioUser ? "Level Up with Vio" : `Welcome, ${VioUser.user.global_name}`}
             </h1>
           <Particles
             className="z-0"
