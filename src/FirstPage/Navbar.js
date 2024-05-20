@@ -24,10 +24,10 @@ function Navbar({VioUser}) {
                     {/* <a href="#about" className="p-4 block md:inline hover:text-gray-500">About</a>
                     <a href="#history" className="p-4 block md:inline hover:text-gray-500">History</a> */}
                     <a href="/terminal" className="p-4 block md:inline hover:text-gray-500">Terminal</a>
+                    {VioUser && VioUser.scraper ? <a href="/scraper" className="p-4 block md:inline hover:text-gray-500">Scraper</a> : null}
                     <a href="https://api.vi-o.tech" target="_blank" rel="noopener noreferrer" className="p-4 block md:inline hover:text-gray-500">API</a>
                     <a href="/discord" className="p-4 block md:inline hover:text-gray-500">Join Discord</a>
                     {/* {VioUser && VioUser.evaluation ? <a href="/evaluation" className="p-4 block md:inline hover:text-gray-500">Evaluation</a> : null} */}
-                    {VioUser && VioUser.scraper ? <a href="/scraper" className="p-4 block md:inline hover:text-gray-500">Scraper</a> : null}
                     {/* {VioUser && VioUser.admin ? <a href="/admin" className="p-4 block md:inline hover:text-gray-500">Admin</a> : null} */}
                     {!VioUser ? <DiscordLogin redirect_uri={`${window.location.protocol}//${window.location.host}/callback`}/> : <a href="/" onClick={logOut} className="p-4 block md:inline hover:text-gray-500">Logout</a>}
                 </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './scraper.css';
-import axios from "axios";
+import TitleBar from "../Components/TitleBar";
 import { instance } from "../instance";
 
 function Account({ AccountObject, changeFunction }) {
@@ -79,9 +79,7 @@ function ScraperIndex({ VioUser }) {
     return (
         <div>
             <section className="h-screen">
-                <div className="sticky top-0 bg-white z-50 text-center rounded-b-3xl shadow-md p-1">
-                    <h1 className="text-5xl font-anta">Scrapers</h1>
-                </div>
+                <TitleBar Title={"Scraper"} />
                 <div className="md650:flex md650:flex-wrap">
                     {
                         list_of_accounts.map((account) => {

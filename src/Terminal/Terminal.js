@@ -1,5 +1,6 @@
 import React, {useEffect, useState } from 'react';
 import { instance } from '../instance';
+import TitleBar from '../Components/TitleBar';
 
 function Terminal({VioUser}) {
     const [chosenItem, setChosenItem] = useState('Korrelite'); // Default item is Korrelite
@@ -25,9 +26,7 @@ function Terminal({VioUser}) {
     return (
         <div>
             <section>
-                <div className="sticky top-0 bg-white z-50 text-center rounded-b-3xl shadow-md p-1">
-                    <h1 className="text-5xl font-anta">Terminal</h1>
-                </div>
+                <TitleBar Title={"Terminal"} />
                 <div>
                     <div className="flex justify-center mt-5">
                         <div className="w-1/3 bg-blue-300 rounded-3xl p-5 m-4">
