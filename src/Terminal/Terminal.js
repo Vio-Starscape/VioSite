@@ -1,17 +1,20 @@
-import React, {useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { instance } from '../instance';
 import TitleBar from '../Components/TitleBar';
+import { AnimatePresence, motion } from 'framer-motion';
 
-function Terminal({VioUser}) {
-    const [chosenItem, setChosenItem] = useState('Korrelite'); // Default item is Korrelite
+const items = ['Korrelite', 'Axnit', 'Reknite']; // Replace with your actual items
+
+function Terminal({ VioUser }) {
+    const [chosenItem, setChosenItem] = useState(items[0]);
     const [currentItem, setCurrentItem] = useState();
 
     useEffect(() => {
         instance
             .get('/terminal/item', {
                 params: {
-                    name: chosenItem
-                }
+                    name: chosenItem,
+                },
             })
             .then((res) => {
                 setCurrentItem(res.data);
@@ -19,27 +22,28 @@ function Terminal({VioUser}) {
             })
             .catch((err) => {
                 console.error('Failed to get permissions:', err);
-                chosenItem('Korrelite');
+                setChosenItem(items[0]);
             });
-    }, [])
+    }, [chosenItem]);
 
     return (
-        <div>
-            <section>
-                <TitleBar Title={"Terminal"} />
-                <div>
-                    <div className="flex justify-center mt-5">
-                        <div className="w-1/3 bg-blue-300 rounded-3xl p-5 m-4">
-                            Hello
-                        </div>
-                        <div className="w-2/3 bg-red-400 rounded-3xl p-5 m-4">
-                            {currentItem ? currentItem.name : 'Loading...'}
-                        </div>
-                    </div>
+        <section>
+            <TitleBar Title={"Terminal"} />
+            <div className="flex">
+                <div className="w-1/4 bg-blue-300 p-4">
+                    <ul>
+                        {items.map((item, index) => (
+                            <li key={index} className="cursor-pointer" onClick={() => setChosenItem(item)}>
+                                {item}
+                            </li>
+                        ))}
+                    </ul>
                 </div>
-            </section>
-        </div>
-    )
+                <div className="w-3/4 bg-red-400 p-4">
+                </div>
+            </div>
+        </section>
+    );
 }
 
 export default Terminal;

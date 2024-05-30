@@ -11,7 +11,7 @@ function TitleBar({ Title }) {
                 </svg>
             </button>
             <h1 className="text-5xl font-anta">{Title}</h1>
-            <div></div>
+            <div />
         </div>
     );
 }
