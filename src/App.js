@@ -6,6 +6,7 @@ import './main.css';
 import Index from './FirstPage/Index';
 import Callback from './Callback';
 import Admin from './Admin/Admin';
+import Hackathon from './Hackathon/Hackathon';
 import Terminal from './Terminal/Terminal';
 import Page404 from './Page404';
 import PageDesktopOnly from './PageDesktopOnly';
@@ -41,6 +42,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Index VioUser={VioUser} />} />
           <Route path="/terminal" element={<Terminal VioUser={VioUser} />} />
+          <Route path='/hackathon' element={<Hackathon />} />
           <Route path="/callback" element={<Callback />} />
           <Route path="/discord" element={<DiscordRedirect />} />
           <Route path="/discord/tos" element={<TermsOfService />} />
