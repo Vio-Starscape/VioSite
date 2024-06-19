@@ -22,6 +22,7 @@ function Account({ AccountObject, changeFunction }) {
         <div className="flex flex-row items-center justify-between border-b border-gray-200 p-4 md650:w-1/2 lg1000:w-1/3 lg1300:w-1/4">
             <div>
                 <h1 className="font-bold text-lg">{AccountObject.name}</h1>
+                <p className="text-gray-500">Host: {AccountObject.host}</p>
                 <p className="text-gray-500">Status: {AccountObject.yoinked ? "Yoinked" : AccountObject.active ? "Active" : "Primed"}</p>
             </div>
             <div>
