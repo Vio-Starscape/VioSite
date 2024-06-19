@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const instance = axios.create({
-    baseURL: "http://localhost:5567/api",
+    baseURL: "https://vi-o.tech/api",
     headers: {
         Authorization: `Bearer ${localStorage.getItem('vio-token')}`,
         "Access-Control-Allow-Origin": "*",
