@@ -10,9 +10,10 @@ function Admin() {
 
     useEffect(() => {
         if (!(VioUser && VioUser.admin)){
+            console.error('User is not an admin');
             window.location.href = '/';
         }
-    });
+    }, [VioUser]);
 
     return (
         <div>
@@ -22,8 +23,6 @@ function Admin() {
                 </div>
                 <div className="flex flex-wrap justify-center m-10 gap-4">
                     <PermissionManagement />
-                    <ItemNameManagement />
-                    <ItemNameManagement />
                 </div>
             </section>
         </div>

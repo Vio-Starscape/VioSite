@@ -22,18 +22,24 @@ function DiscordRedirect() {
 
 function App() {
   const [VioUser, SetVIOUser] = useState();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     instance
       .get('/auth/@me/permissions')
       .then((res) => {
         SetVIOUser(res.data);
-        console.log('Got permissions:', res.data);
+        setLoading(false);
       })
       .catch((err) => {
-        console.error('Failed to get permissions:', err);
+        console.error('Failed to get permissions');
+        setLoading(false);
       });
   }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <VioContext.Provider value={{ VioUser, SetVIOUser }}>
@@ -45,7 +51,7 @@ function App() {
           <Route path="/discord" element={<DiscordRedirect />} />
           <Route path="/discord/tos" element={<TermsOfService />} />
           <Route path="/discord/privacy" element={<PrivacyPolicy />} />
-          {/* <Route path="/admin" element={<Admin VioUser={VioUser} />} /> */}
+          <Route path="/admin" element={<Admin VioUser={VioUser} />} />
           <Route path="/scraper" element={<ScraperIndex VioUser={VioUser} />} />
 
           <Route path="*" element={<Page404 />} />
