@@ -42,6 +42,10 @@ function ScraperIndex({ VioUser }) {
                 name: account.name,
                 active: account.active,
                 yoinked: mark_yoinked
+            }, {
+                params: {
+                    host: account.host
+                }
             })
             .then((res) => {
                 if (res.status === 200) {
