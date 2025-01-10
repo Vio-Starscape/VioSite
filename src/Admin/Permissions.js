@@ -30,7 +30,7 @@ function PermissionManagement() {
     }
 
     return (
-        <div className="rounded-xl bg650:w-4/5 bg-white shadow-xl">
+        <div className="rounded-xl w-4/5 bg-white shadow-xl">
             <h1 className="text-center text-4xl font-anta">Permissions</h1>
 
             <div className="grid gap-10 p-5">

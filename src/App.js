@@ -10,6 +10,7 @@ import Terminal from './Terminal/Terminal';
 import Page404 from './Page404';
 import PageDesktopOnly from './PageDesktopOnly';
 import ScraperIndex from './Scraper/ScraperIndex';
+import Settings from './Settings/Settings';
 import { instance } from './instance';
 
 function DiscordRedirect() {
@@ -51,6 +52,7 @@ function App() {
           <Route path="/discord" element={<DiscordRedirect />} />
           <Route path="/discord/tos" element={<TermsOfService />} />
           <Route path="/discord/privacy" element={<PrivacyPolicy />} />
+          <Route path="/settings" element={<Settings />} />
           <Route path="/admin" element={<Admin VioUser={VioUser} />} />
           <Route path="/scraper" element={<ScraperIndex VioUser={VioUser} />} />
 

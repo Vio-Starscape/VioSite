@@ -26,6 +26,7 @@ function Navbar({VioUser}) {
                     {/* {VioUser && VioUser.evaluation ? <a href="/evaluation" className="p-4 block md:inline hover:text-gray-500">Evaluation</a> : null} */}
                     {VioUser && VioUser.scraper ? <a href="/scraper" className="p-4 block md:inline hover:text-gray-500">Scraper</a> : null}
                     {VioUser && VioUser.admin ? <a href="/admin" className="p-4 block md:inline hover:text-gray-500">Admin</a> : null}
+                    {VioUser ? <a href="/settings" className="p-4 block md:inline hover:text-gray-500">Settings</a> : null}
                     {!VioUser ? <DiscordLogin redirect_uri={`${window.location.protocol}//${window.location.host}/callback`}/> : <a href="/" onClick={logOut} className="p-4 block md:inline hover:text-gray-500">Logout</a>}
                 </div>
             </nav>
