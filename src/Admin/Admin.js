@@ -23,6 +23,7 @@ function Admin() {
                 </div>
                 <div className="flex flex-wrap justify-center m-10 gap-4">
                     <PermissionManagement />
+                    <ItemNameManagement />
                 </div>
             </section>
         </div>
