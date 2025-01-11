@@ -47,7 +47,7 @@ function ApiKey() {
                         readOnly
                     />
                     <button 
-                        className="bg-red-500 hover:bg-red-700 text-white font-bold w-1/2 md650:w-auto md650:mx-2 my-2 md650:my-0 py-2 px-4 rounded"
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold w-auto md650:mx-2 my-2 md650:my-0 py-2 px-4 rounded"
                         onClick={reloadKey}
                     >
                         Regenerate
