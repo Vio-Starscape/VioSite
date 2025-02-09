@@ -21,6 +21,7 @@ function Navbar({VioUser}) {
                     </svg>
                 </div>
                 <div className={`md:block right-0 pr-8 md:pointer-events-auto absolute top-full md:top-auto bg-white z-10${isOpen ? 'block max-h-screen opacity-100 md:pointer-events-auto' : 'hidden md:block max-h-0 md:max-h-screen opacity-0 pointer-events-none md:opacity-100'} transition-all`}>
+                    <a href="/about" className="p-4 block md:inline hover:text-gray-500">About</a>
                     <a href="https://api.vio.er-ic.ca" target="_blank" rel="noopener noreferrer" className="p-4 block md:inline hover:text-gray-500">API</a>
                     <a href="/discord" className="p-4 block md:inline hover:text-gray-500">Join Discord</a>
                     {/* {VioUser && VioUser.evaluation ? <a href="/evaluation" className="p-4 block md:inline hover:text-gray-500">Evaluation</a> : null} */}

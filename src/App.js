@@ -4,6 +4,7 @@ import { TermsOfService, PrivacyPolicy } from './Legal';
 import { VioContext } from './context';
 import './main.css';
 import Index from './FirstPage/Index';
+import About from './FirstPage/About';
 import Callback from './Callback';
 import Admin from './Admin/Admin';
 import Terminal from './Terminal/Terminal';
@@ -47,7 +48,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index VioUser={VioUser} />} />
-          <Route path="/terminal" element={<Terminal VioUser={VioUser} />} />
+          <Route path="/about" element={<About />} />
+          {/* <Route path="/terminal" element={<Terminal VioUser={VioUser} />} /> */}
           <Route path="/callback" element={<Callback />} />
           <Route path="/discord" element={<DiscordRedirect />} />
           <Route path="/discord/tos" element={<TermsOfService />} />
