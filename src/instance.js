@@ -8,3 +8,4 @@ export const instance = axios.create({
         "Access-Control-Allow-Credentials": "true",
     },
 });
+
