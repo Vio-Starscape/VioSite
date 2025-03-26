@@ -9,7 +9,6 @@ import Callback from './Callback';
 import Admin from './Admin/Admin';
 import Terminal from './Terminal/Terminal';
 import Page404 from './Page404';
-import PageDesktopOnly from './PageDesktopOnly';
 import ScraperIndex from './Scraper/ScraperIndex';
 import Settings from './Settings/Settings';
 import { instance } from './instance';
@@ -47,16 +46,16 @@ function App() {
     <VioContext.Provider value={{ VioUser, SetVIOUser }}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index VioUser={VioUser} />} />
+          <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
-          {/* <Route path="/terminal" element={<Terminal VioUser={VioUser} />} /> */}
+          <Route path="/terminal" element={<Terminal/>} />
           <Route path="/callback" element={<Callback />} />
           <Route path="/discord" element={<DiscordRedirect />} />
           <Route path="/discord/tos" element={<TermsOfService />} />
           <Route path="/discord/privacy" element={<PrivacyPolicy />} />
           <Route path="/settings" element={<Settings />} />
-          <Route path="/admin" element={<Admin VioUser={VioUser} />} />
-          <Route path="/scraper" element={<ScraperIndex VioUser={VioUser} />} />
+          <Route path="/admin" element={<Admin/>} />
+          <Route path="/scraper" element={<ScraperIndex />} />
 
           <Route path="*" element={<Page404 />} />
         </Routes>

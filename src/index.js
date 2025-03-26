@@ -7,7 +7,7 @@ import { MatomoProvider, createInstance } from '@datapunt/matomo-tracker-react'
 
 const matomoInstance = createInstance({
   urlBase: 'https://matomo.er-ic.ca/',
-  siteId: 3,
+  siteId: process.env.NODE_ENV === 'production' ?  3 : 4,
   linkTracking: false, // optional, default value: true
   configurations: { // optional, default value: {}
     // any valid matomo configuration, all below are optional
