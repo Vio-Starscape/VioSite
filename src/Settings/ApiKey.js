@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import { useMatomo } from '@datapunt/matomo-tracker-react';
 import { VioContext } from "../context";
 import { instance } from "../instance";
 
@@ -6,6 +7,7 @@ function ApiKey() {
 
     const { VioUser } = useContext(VioContext);
     const [apiKey, setApiKey] = useState();
+    const { trackEvent } = useMatomo();
 
     useEffect(() => {
         if (!(VioUser)){
@@ -24,6 +26,12 @@ function ApiKey() {
     });
 
     const reloadKey = () => {
+            trackEvent({ 
+                category: 'API Key', 
+                action: 'Regenerate', 
+                name: 'Regenerate API Key' 
+            });
+
             instance
                 .post(`/auth/@me/key/regenerate`)
                 .then((res) => {

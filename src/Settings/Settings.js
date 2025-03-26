@@ -1,12 +1,16 @@
 import React, { useEffect, useContext } from "react";
+import { useMatomo } from '@datapunt/matomo-tracker-react';
 import { VioContext } from "../context";
 import ApiKey from "./ApiKey";
 
 function Settings() {
 
     const { VioUser } = useContext(VioContext);
+    const { trackPageView } = useMatomo();
 
     useEffect(() => {
+        trackPageView();
+
         if (!(VioUser)){
             console.error('User is not an admin');
             window.location.href = '/';
