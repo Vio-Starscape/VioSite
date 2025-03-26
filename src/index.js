@@ -3,10 +3,25 @@ import ReactDOM from 'react-dom/client';
 import './main.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { MatomoProvider, createInstance } from '@datapunt/matomo-tracker-react'
+
+const matomoInstance = createInstance({
+  urlBase: 'https://matomo.er-ic.ca/',
+  siteId: 3,
+  linkTracking: false, // optional, default value: true
+  configurations: { // optional, default value: {}
+    // any valid matomo configuration, all below are optional
+    disableCookies: true,
+    setSecureCookie: true,
+    setRequestMethod: 'POST'
+  }
+})
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <App />
+    <MatomoProvider value={matomoInstance}>
+        <App />
+    </MatomoProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

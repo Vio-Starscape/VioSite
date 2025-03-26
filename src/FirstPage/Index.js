@@ -3,14 +3,17 @@ import Particles, { initParticlesEngine } from "@tsparticles/react";
 import Helmet from "react-helmet";
 import { loadFull } from "tsparticles";
 import './index.css';
-
+import { useMatomo } from '@datapunt/matomo-tracker-react';
 import Navbar from "./Navbar";
 
 function Index({ VioUser }) {
   const containerRef = useRef(null);
   const [options, setOptions]= useState(getParticleOptions());
+  const { trackPageView } = useMatomo();
 
   useEffect(() => {
+    trackPageView();
+
     initParticlesEngine(async (engine) => {
       await loadFull(engine);
     });
