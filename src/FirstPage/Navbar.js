@@ -1,14 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import './index.css';
 import DiscordLogin from '../Login';
+import { VioContext } from '../context';
 
 function logOut() {
     localStorage.removeItem('vio-token');
     window.location.reload();
 }
 
-function Navbar({VioUser}) {
+function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const { VioUser } = useContext(VioContext);
     return (
         <div>
             <nav className="flex justify-between items-center h-16 bg-white text-black relative shadow-sm font-mono z-10" role="navigation">
@@ -22,6 +24,7 @@ function Navbar({VioUser}) {
                 </div>
                 <div className={`md:block right-0 pr-8 md:pointer-events-auto absolute top-full md:top-auto bg-white z-10${isOpen ? 'block max-h-screen opacity-100 md:pointer-events-auto' : 'hidden md:block max-h-0 md:max-h-screen opacity-0 pointer-events-none md:opacity-100'} transition-all`}>
                     <a href="/about" className="p-4 block md:inline hover:text-gray-500">About</a>
+                    {VioUser ? <a href="/terminal" className="p-4 block md:inline hover:text-gray-500">Terminal</a> : null}
                     <a href={`${window.location.protocol}//api.${window.location.hostname}`} target="_blank" rel="noopener noreferrer" className="p-4 block md:inline hover:text-gray-500">API</a>
                     <a href="/discord" className="p-4 block md:inline hover:text-gray-500">Join Discord</a>
                     <a href="https://discord.com/oauth2/authorize?client_id=1199334865858986104&permissions=0&scope=applications.commands+bot" className="p-4 block md:inline hover:text-gray-500">Add Bot</a>

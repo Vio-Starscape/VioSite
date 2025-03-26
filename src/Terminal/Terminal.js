@@ -2,20 +2,15 @@ import React, {useEffect, useState, useContext} from 'react';
 import { instance } from '../instance';
 import { VioContext } from '../context';
 import { useMatomo } from '@datapunt/matomo-tracker-react';
-import axios from 'axios';
-
-const createApiInstance = (apiKey) => {
-    return axios.create({
-        baseURL: "https://api.vio.er-ic.ca/v1",
-        headers: {
-            "x-api-key": apiKey
-        },
-    });
-};
+import ItemContainer from './Item';
+import SearchContainer from './Search';
+import { createApiInstance } from './api';
 
 function Terminal() {
 
-    const [api, setApi] = useState();
+    const [apiInstance, setApiInstance] = useState(null);
+    const [item, setItem] = useState(null);
+    const [itemInfo, setItemInfo] = useState(null);
     const { VioUser } = useContext(VioContext);
     const { trackPageView } = useMatomo();
     
@@ -27,17 +22,37 @@ function Terminal() {
             window.location.href = '/';
         }
 
-        if (!api) {
+        if (!apiInstance) {
             instance
                 .get(`/auth/@me/key`)
                 .then((res) => {
-                    setApi(createApiInstance(res.data.key));
+                    const userApi = createApiInstance(res.data.key);
+                    setApiInstance(() => userApi);
                 })
                 .catch((err) => {
                     console.error('Failed to get permissions:', err);
                 });
         }
-    });
+    }, []);
+
+    useEffect(() => {
+        if (apiInstance && item) {
+            apiInstance.get(
+                `/market/latest`, 
+                {
+                    params: {
+                        items: item,
+                    }
+                })
+                .then((res) => {
+                    console.log('Item info:', res.data);
+                    setItemInfo(res.data.items[item]);
+                })
+                .catch((err) => {
+                    console.error('Failed to get item info:', err);
+                });
+        }
+    }, [item]);
 
     return (
         <div>
@@ -45,7 +60,13 @@ function Terminal() {
                 <div className="sticky top-0 bg-white z-50 text-center rounded-b-3xl shadow-md p-1">
                     <h1 className="text-5xl font-anta">Terminal</h1>
                 </div>
-                <div className="flex flex-wrap justify-center m-10 gap-4">
+                <div className="flex flex-col md:flex-row justify-center m-4 md:m-10 gap-4">
+                    <div className="w-full md:w-1/4">
+                        <SearchContainer apiInstance={apiInstance} setItem={setItem} />
+                    </div>
+                    <div className='w-full md:w-3/4'>
+                        <ItemContainer itemInfo={itemInfo} />
+                    </div>
                 </div>
             </section>
         </div>

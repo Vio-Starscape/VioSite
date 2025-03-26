@@ -1,15 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
-import Helmet from "react-helmet";
 import { loadFull } from "tsparticles";
 import './index.css';
 import { useMatomo } from '@datapunt/matomo-tracker-react';
+import { VioContext } from "../context";
 import Navbar from "./Navbar";
 
-function Index({ VioUser }) {
+function Index() {
   const containerRef = useRef(null);
   const [options, setOptions]= useState(getParticleOptions());
   const { trackPageView } = useMatomo();
+  const { VioUser } = useContext(VioContext);
 
   useEffect(() => {
     trackPageView();
@@ -33,7 +34,7 @@ function Index({ VioUser }) {
   return (
     <div className="m-0 z-0">
       <section className="h-screen relative overflow-hidden z-0">
-        <Navbar className="z-10" VioUser={VioUser} />
+        <Navbar className="z-10" />
         <div className="absolute top-0 left-0 w-full h-full z-0 bg-black flex items-center justify-center">
             <h1 className="text-white text-center text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-anta shadow-lg z-10">
               {!VioUser ? "Level Up with Vio" : `Welcome, ${VioUser.user.username}`}
