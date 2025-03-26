@@ -56,7 +56,7 @@ function SearchContainer({ apiInstance, setItem }) {
               trackEvent({
                 category: "Terminal",
                 action: "Item Clicked",
-                name: item.name,
+                name: item,
               });
             }}
           >
