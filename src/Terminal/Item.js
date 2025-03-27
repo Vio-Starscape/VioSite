@@ -55,7 +55,7 @@ function ItemContainer({ itemInfo }) {
                         </span>
                 
                     {/* Price */}
-                    <span className="w-24 text-right">
+                    <span className="w-24 text-right whitespace-nowrap">
                         {formatPrice(entry.price)} C
                     </span>
                 </div>
@@ -72,8 +72,8 @@ function ItemContainer({ itemInfo }) {
             <h2 className="text-2xl font-bold mb-2 font-anta">Item: {itemInfo.name}</h2>
             <p className="text-sm text-gray-500 mb-4">Last scanned: {new Date(itemInfo.time_scanned).toLocaleString()}</p>
             <div className="flex flex-col lg:flex-row gap-6 overflow-hidden">
-                {renderListings(itemInfo.buy || [], 'Buy')}
                 {renderListings(itemInfo.sell || [], 'Sell')}
+                {renderListings(itemInfo.buy || [], 'Buy')}
             </div>
         </div>
     );

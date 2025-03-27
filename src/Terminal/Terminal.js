@@ -4,6 +4,8 @@ import { VioContext } from '../context';
 import { useMatomo } from '@datapunt/matomo-tracker-react';
 import ItemContainer from './Item';
 import SearchContainer from './Search';
+import DarkItemContainer from './cmdItems';
+import DarkSearchContainer from './cmdSearch';
 import { createApiInstance } from './api';
 
 function Terminal() {
@@ -11,6 +13,7 @@ function Terminal() {
     const [apiInstance, setApiInstance] = useState(null);
     const [item, setItem] = useState(null);
     const [itemInfo, setItemInfo] = useState(null);
+    const [darkmode, setDarkmode] = useState(false);
     const { VioUser } = useContext(VioContext);
     const { trackPageView } = useMatomo();
     
@@ -54,11 +57,32 @@ function Terminal() {
         }
     }, [item]);
 
-    return (
+    const handleThemeToggle = () => {
+        setDarkmode((prevMode) => !prevMode);
+        console.log(item);
+    }
+
+    return darkmode ? (
+        <div className="dark-mode bg-black">
+            <section className="h-screen bg-black text-green-400">
+                <div className="sticky top-0 z-50 text-center rounded-b-3xl shadow-md p-1">
+                    <h1 onClick={handleThemeToggle} className="text-5xl font-anta">Terminal</h1>
+                </div>
+                <div className="flex flex-col md:flex-row justify-center m-4 md:m-10 gap-4">
+                    <div className="w-full md:w-1/4">
+                        <DarkSearchContainer apiInstance={apiInstance} setItem={setItem} />
+                    </div>
+                    <div className='w-full md:w-3/4'>
+                        <DarkItemContainer itemInfo={itemInfo} />
+                    </div>
+                </div>
+            </section>
+        </div>
+    ) : (
         <div>
             <section className="h-screen">
                 <div className="sticky top-0 bg-white z-50 text-center rounded-b-3xl shadow-md p-1">
-                    <h1 className="text-5xl font-anta">Terminal</h1>
+                    <h1 onClick={handleThemeToggle} className="text-5xl font-anta">Terminal</h1>
                 </div>
                 <div className="flex flex-col md:flex-row justify-center m-4 md:m-10 gap-4">
                     <div className="w-full md:w-1/4">
