@@ -12,6 +12,7 @@
     <meta property="og:title" content="Vio"/>
     <meta property="og:description" content="Vio is a company focused on development of starscape market technologies."/>
     <meta property="og:url" content=""/>
+    <meta property="og:image" content=""/>
 
     <script>
       (function() {
@@ -22,6 +23,37 @@
         const ogUrlMeta = document.querySelector('meta[property="og:url"]');
         if (ogUrlMeta) {
           ogUrlMeta.setAttribute('content', baseUrl);
+        }
+      })();
+    </script>
+    <script>
+      (function() {
+        // Retrieve the current URL
+        const currentUrl = window.location.href;
+    
+        // Check if the URL contains '/terminal'
+        if (currentUrl.includes('/terminal')) {
+          // Parse the query parameters
+          const urlParams = new URLSearchParams(window.location.search);
+          const item = urlParams.get('item');
+    
+          // If the 'item' parameter exists and is not empty
+          if (item) {
+            // Construct the new image URL
+            const hostname = window.location.origin;
+            const imageUrl = `${hostname}/api/terminal/image/${item}`;
+    
+            // Find the existing og:image meta tag or create a new one if it doesn't exist
+            let metaTag = document.querySelector('meta[property="og:image"]');
+            if (!metaTag) {
+              metaTag = document.createElement('meta');
+              metaTag.setAttribute('property', 'og:image');
+              document.head.appendChild(metaTag);
+            }
+    
+            // Update the content attribute with the new image URL
+            metaTag.setAttribute('content', imageUrl);
+          }
         }
       })();
     </script>
