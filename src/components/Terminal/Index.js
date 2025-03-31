@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useState, useContext } from 'react';
 import { instance, createApiInstance } from '@/lib/apiClients';
 import { VioContext } from '@/context/VioContext';
 import { useMatomo } from '@datapunt/matomo-tracker-react';
@@ -59,7 +59,6 @@ function Terminal() {
 
     const handleThemeToggle = () => {
         setDarkmode((prevMode) => !prevMode);
-        console.log(item);
     }
 
     return darkmode ? (

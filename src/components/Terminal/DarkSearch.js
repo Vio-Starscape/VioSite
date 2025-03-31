@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useMatomo } from "@datapunt/matomo-tracker-react";
-import { useRouterm, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 function DarkSearchContainer({ apiInstance, setItem }) {
     const { trackEvent } = useMatomo();

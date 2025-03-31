@@ -1,4 +1,7 @@
 import Terminal from '@/components/Terminal/Index';
+import { Suspense } from 'react';
+
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params, searchParams }) {
     const searchParamsResolved = await searchParams;
@@ -34,5 +37,9 @@ export async function generateMetadata({ params, searchParams }) {
 }
 
 export default function Page() {
-    return <Terminal />;
+    return (
+        <Suspense fallback={<div className="flex justify-center items-center h-screen">Loading...</div>}>
+            <Terminal />
+        </Suspense>
+    );
 }
