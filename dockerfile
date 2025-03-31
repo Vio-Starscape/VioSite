@@ -1,5 +1,5 @@
 # ---- Base Node ----
-FROM node:18-slim AS base
+FROM node:18-alpine AS base
 WORKDIR /app
 COPY package*.json ./
 
@@ -9,14 +9,17 @@ RUN npm install
 
 # ---- Copy Files/Build ----
 FROM dependencies AS build
-WORKDIR /app
-COPY . /app
+COPY . .
 RUN npm run build
 
-# --- Release with Alpine ----
+# ---- Release ----
 FROM node:18-alpine AS release
 WORKDIR /app
-COPY --from=build /app/build ./build
-RUN npm install -g serve
+
+# Install only production dependencies
+COPY --from=dependencies /app/node_modules ./node_modules
+COPY --from=build /app/.next ./.next
+COPY --from=build /app/public ./public
+
 EXPOSE 3000
-CMD ["serve", "-s", "build"]
+CMD ["npm", "start"]

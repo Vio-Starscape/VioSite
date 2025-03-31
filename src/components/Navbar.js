@@ -1,0 +1,53 @@
+"use client";
+
+import { useState, useContext, useEffect } from 'react';
+import DiscordLogin from '@/components/DiscordLogin';
+import { VioContext } from '@/context/VioContext';
+
+function Navbar() {
+    const [isOpen, setIsOpen] = useState(false);
+    const { VioUser, logout, loading } = useContext(VioContext);
+    const [redirectUri, setRedirectUri] = useState(null);
+    const [apiUrl, setApiUrl] = useState("#");
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            setRedirectUri(`${window.location.protocol}//${window.location.host}/callback`);
+            setApiUrl(`${window.location.protocol}//api.${window.location.hostname}`);
+        }
+    }, []);
+
+    if (loading) return null;
+
+    return (
+        <div>
+            <nav className="flex justify-between items-center h-16 bg-white text-black relative shadow-sm font-mono z-10" role="navigation">
+                <a href="/" className="pl-8 font-anta text-3xl">Vio</a>
+                <div className="px-4 cursor-pointer md:hidden" onClick={() => setIsOpen(!isOpen)}>
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                            d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </div>
+                <div className={`md:block right-0 pr-8 md:pointer-events-auto absolute top-full md:top-auto bg-white z-10${isOpen ? ' block max-h-screen opacity-100 md:pointer-events-auto' : ' hidden md:block max-h-0 md:max-h-screen opacity-0 pointer-events-none md:opacity-100'} transition-all`}>
+                    <a href="/about" className="p-4 block md:inline hover:text-gray-500">About</a>
+                    {VioUser ? <a href="/terminal" className="p-4 block md:inline hover:text-gray-500">Terminal</a> : null}
+                    <a href={apiUrl} target="_blank" rel="noopener noreferrer" className="p-4 block md:inline hover:text-gray-500">API</a>
+                    <a href="https://discord.gg/9JsmDfJtAR" target="_blank" rel="noopener noreferrer" className="p-4 block md:inline hover:text-gray-500">Join Discord</a>
+                    <a href="https://discord.com/oauth2/authorize?client_id=1199334865858986104&permissions=0&scope=applications.commands+bot" className="p-4 block md:inline hover:text-gray-500">Add Bot</a>
+                    {VioUser && VioUser.scraper ? <a href="/scraper" className="p-4 block md:inline hover:text-gray-500">Scraper</a> : null}
+                    {VioUser && VioUser.admin ? <a href="/admin" className="p-4 block md:inline hover:text-gray-500">Admin</a> : null}
+                    {VioUser ? <a href="/settings" className="p-4 block md:inline hover:text-gray-500">Settings</a> : null}
+                    {!VioUser && redirectUri ? (
+                        <DiscordLogin redirect_uri={redirectUri} />
+                    ) : VioUser ? (
+                        <a href="/" onClick={logout} className="p-4 block md:inline hover:text-gray-500">Logout</a>
+                    ) : null}
+                </div>
+            </nav>
+        </div>
+    );
+}
+
+export default Navbar;
