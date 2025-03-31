@@ -5,7 +5,7 @@ COPY package*.json ./
 
 # ---- Dependencies ----
 FROM base AS dependencies
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # ---- Copy Files/Build ----
 FROM dependencies AS build
