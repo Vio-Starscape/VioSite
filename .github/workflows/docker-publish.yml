@@ -3,7 +3,9 @@ name: Build and Push Docker Image
 on:
   push:
     branches:
-      - master 
+      - master
+      - nextjs
+
 
 jobs:
   build:
@@ -33,5 +35,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ env.REPO_NAME }}:latest
-            ghcr.io/${{ env.REPO_NAME }}:${{ github.run_number }}
+            ghcr.io/${{ env.REPO_NAME }}:nextjs-latest
+            ghcr.io/${{ env.REPO_NAME }}:nextjs-${{ github.run_number }}
